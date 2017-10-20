@@ -61,6 +61,11 @@ function ref_count {
 	# exit
 
 	files=$(bash -c "find '$1' -type f -name $2" | wc -l)
+	if [ $files -eq 0 ]; then
+		echo "There are no files."
+		exit
+	fi
+
 	echo "gitmine will refcount $files files. This may take a while..."
 	read -p "Do you want to continue (y/n)? " choice
 
@@ -72,11 +77,9 @@ function ref_count {
 
 	bash -c "find '$1' -type f -name $2" | \
 		xargs bash -c 'find_and_count "$@"' _ | \
-		awk '{ names[$2] += $1; };
-			END { for(name in names) { 
-			printf "%-6d %s \n", names[name], name }}' | \
-			sort -rn | \
-			less
+		awk '{ names[$2] += $1; }; END { for(name in names) { printf "%-6d %s \n", names[name], name }}' | \
+		sort -rn | \
+		less
 }
 
 function print_score {
