@@ -88,10 +88,17 @@ function print_score {
 }
 
 function hi {
+	if [ "$1" == "" ]; then
+		echo "File name was expected";
+		exit
+	fi
+
 	fname="$1"
 	echo ""
 	echo "Commits | Author"
-	git log --pretty=format:"%an" -- $fname | print_score | sort -nr
+	git log --pretty=format:"%an" -- "$fname" | \
+	print_score "$fname" | \
+	sort -nr
 	echo ""
 	echo ""
 }
@@ -106,8 +113,14 @@ function commits_per_file {
 }
 
 function wbd {
-	# TODO: Sencible defaults.
-	git log --since $1 --pretty=format:"%C(yellow)%h %Creset%an %ad %s" \ 
+	if [ "$1" == "" ] || [ "$2" == "" ];
+	then
+		echo "Arguments <since> and <author> are both required for this command."
+		echo ""
+		exit
+	fi
+
+	git log --since $1 --pretty=format:"%C(yellow)%h %Creset%an %ad %s" \
 		--date=short --author $2
 }
 
@@ -116,13 +129,13 @@ function show_help {
 	echo "Usage: gitmine <command> [<args>]"
 	echo ""
 	echo "Common commands:"
-	echo "   cmpf  [<author>]                 Commits per file."
-	echo "   refc  [<filename>]               Count class references."
-	echo "   hi    [<filename>]               Commits count per file."
-	echo "   score                           Global commit count per author."
-	echo "   wbd   <date> <author>            What 've been doing?"
-	echo ""
-	echo "https://github.com/amiralles/gitmine"
+	# working
+	echo "   wbd   <date> <author>      What been doing?"
+	echo "   cmpf  [author]             Commits per file."
+	# not working
+	echo "   refc  <filename>           Count class references."
+	echo "   hi    <filename>           Commits count per file."
+	echo "   score                      Global commit count per author."
 	echo ""
 }
 
@@ -142,20 +155,15 @@ if [[ "$1" == "cmpf" ]]; then
 elif [[ "$1" == "wbd" ]]; then
 	wbd "$2" "$3"
 elif [[ "$1" == "score" ]]; then
-	hi
+	hi "$2"
 elif [[ "$1" == "hi" ]]; then
 	hi "$2"
-elif [[ "$1" == "pwd" ]]; then
-	# this is here for debug purposes.
+elif [[ "$1" == "pwd" ]]; then # <- This one is for debugging purposes.
 	pwd
 	exit
 elif [[ "$1" == "refc" ]]; then
 	dir="$(pwd)"
-	# Important: If we add single quotes to $dir the path
-	#            must be case sensitive. That makes sence on linux
-	#            but may fail on OSX or git bash.
-	#            To avoid path expansion $2 MUST be quoted!
-	ref_count "$dir" "'$2'"
+	ref_count "$dir" "'$2'" # <- $2 MUST be quoted to avoid path expansion.
 else
 	show_help
 fi
