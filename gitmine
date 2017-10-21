@@ -174,7 +174,7 @@ elif [[ "$1" == "pwd" ]]; then # <- This one is for debugging purposes.
 	exit
 elif [[ "$1" == "refc" ]]; then
 	dir="$(pwd)"
-	ref_count "$dir" "'$2'" # <- $2 MUST be quoted to avoid path expansion.
+	ref_count "$dir" "'$2'"    # <- $2 MUST be quoted to avoid path expansion.
 else
 	show_help
 fi
