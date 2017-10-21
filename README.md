@@ -5,23 +5,24 @@ It would be possible for you to be productive from day one?
 
 The answer, as almost everything else in tech, is "it depends!" ;) but where would you start? 
 
-I don't know about you, but what I would normally do is try to find 
-entry points to the system or the api that I'll be working on, and from there try 
-figure out some execution paths and try to understand what the system actually 
-does. If the system 've a tests project, I'd check that, too. While this approach
-is fine (and sometimes, it works too), can you be sure that you are looking at 
-the meaningfull execution paths, the most important ones? or the rigth set of thests? 
-can you spot with just looking at the code where the bread and butter 
-of this particular system really is?
+I don't know about you, but what I would normally do is to try to find 
+entry points to the system or the API that I'll be working on, and try to find
+from there some execution paths that allows me to understand what the system actually 
+does. If the system has a tests project, I'd check that, too. 
 
-If you are not familiar with the code base, you may connot tell for sure if you are
-looking at the right parts. In this kind of situations is where you can use a tool
-like **gitmine** and try to find *pain points* instead of entry points.
+While this approach is fine (and sometimes, it works too), can you be sure that you are 
+looking at meaningfull execution paths, the most important ones? or the rigth set of tests? 
+can you spot by just looking at the code where the bread and butter 
+of the system really is?
+
+If you are not familiar with the code base, chances are that you connot tell for sure if you are
+looking at the right parts of the system. In this kind of situations is where you can use a tool
+like **gitmine** to try to find *pain points* instead of entry points.
 
 When I say "pain points", I mean code that changes often and also tends to 
 change a lot. In general, this means that either, there is a whole lot 
 of stuff going on in there, or is a really fragile part of the system, 
-or what ever. *It's something that worth to take a look at* beacuse there
+or what ever, *it's something that worth to take a look at* beacuse there
 is a lot of action in there.
 
 By using **gitmine** you will be able to tell which files changes 
