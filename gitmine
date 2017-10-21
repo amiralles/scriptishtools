@@ -131,10 +131,10 @@ function show_help {
 	# working
 	echo "   wbd   <date> <author>      What been doing?"
 	echo "   cmpf  [author]             Commits per file."
-	# not working
-	echo "   refc  <filename>           Count class references."
 	echo "   hi    <filename>           Commits count per file."
 	echo "   score                      Global commit count per author."
+	# not working
+	echo "   refc  <filename>           Count class references."
 	echo ""
 }
 
