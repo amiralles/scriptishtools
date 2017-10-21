@@ -3,7 +3,7 @@ Let's suppose you have to start working on a huge project, a really
 large code base that you never 've seen before. 
 It would be possible for you to be productive from day one?
 
-The answer, as almost everything in tech, is "it depends!" ;) but where would you start? 
+The answer, as almost everything else in tech, is "it depends!" ;) but where would you start? 
 
 I don't know about you, but what I would normally do is try to find 
 entry points to the system or the api that I'll be working on, and from there try 
