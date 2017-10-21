@@ -83,22 +83,21 @@ function ref_count {
 }
 
 function print_score {
-	awk "{ names[\$1] +=1; };END { for (n in names) " \
-		"printf(\"%7d | %s\n\", names[n], n); };"
+	# where $1 points to the author's name.
+	awk "{ names[\$1] += 1; }; 
+		END { for (n in names) printf(\"|%8d | %-23s |\n\", names[n], n)}"
 }
 
 function hi {
-	if [ "$1" == "" ]; then
-		echo "File name was expected";
-		exit
-	fi
-
 	fname="$1"
 	echo ""
-	echo "Commits | Author"
-	git log --pretty=format:"%an" -- "$fname" | \
-	print_score "$fname" | \
+	echo "+-----------------------------------+"
+	echo "| Commits | Author                  |"
+	echo "+-----------------------------------+"
+	git log --pretty=format:"%an" -- $fname | \
+	print_score | \
 	sort -nr
+	echo "+-----------------------------------+"
 	echo ""
 	echo ""
 }
@@ -155,8 +154,15 @@ if [[ "$1" == "cmpf" ]]; then
 elif [[ "$1" == "wbd" ]]; then
 	wbd "$2" "$3"
 elif [[ "$1" == "score" ]]; then
-	hi "$2"
+	# Global count. 
+	# All authors, all files.
+	hi
 elif [[ "$1" == "hi" ]]; then
+	# Counts commits per file. All authors.
+	if [ "$2" == "" ]; then
+		echo "The parameter <file> is required for this command.";
+		exit
+	fi
 	hi "$2"
 elif [[ "$1" == "pwd" ]]; then # <- This one is for debugging purposes.
 	pwd
