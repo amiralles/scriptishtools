@@ -1,0 +1,34 @@
+#!/bin/bash
+if [ ! -d "$HOME/bin" ]; then
+	mkdir "$HOME/bin"
+fi
+
+if [ ! -d "$HOME/bin" ]; then
+	echo "Failed to install to $HOME/bin"
+	echo "(Maybe due to permissions issues.)"
+	exit
+fi
+
+echo "Installing scriptishtools to $HOME/bin ..."
+
+# TODO: Add the rest of the tools.
+GM=gitmine
+cp $GM "$HOME/bin"
+
+if [ ! -f "$HOME/bin/$GM" ]; then
+	echo "Failed to install *$GM* to $HOME/bin"
+	exit
+fi
+
+echo "Done!"
+echo ""
+
+if [[ :$PATH: != *:"~/bin":* ]] ; then
+	echo "Tip: Add $HOME/bin to your PATH to run scriptishtools straight."
+	echo "If you are using bash, try adding this line to your ~/.bashrc file"
+	echo "(or ~/.bash_profile on the mac.)"
+	echo ""
+	echo 'export PATH="$PATH:~/bin"'
+	echo ""
+fi
+
