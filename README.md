@@ -30,7 +30,11 @@ often, who 've been working on those files, detect potencial refactors,
 and much more...
 
 ## How to install
-TODO: 
+Just run the instalation script.
+```
+./install
+```
+*\ Note: You may have to add ~/bin to your path (manually).
 
 ## Commands
 ### Commits per file
