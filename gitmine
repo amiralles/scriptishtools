@@ -7,6 +7,7 @@ function find_classes {
 	# class foo
 	# public class foo
 	# public abstract class foo
+	# TODO: Add partials.
 	awk '$1=="class" { print $2};
 	     $2=="class" { print $3};
 	     $3=="class" { print $4};
@@ -42,12 +43,12 @@ function missing_name {
 	echo "For instance:"
    	echo "gitmine refc foo.cs"
 	echo "gitmine refc '*.cs'"
-	exit
+	exit 1
 }
 
 function invalid_op {
 	echo "Invalid option"
-	exit
+	exit 1
 }
 
 function ref_count {
@@ -55,15 +56,10 @@ function ref_count {
 		missing_name
 	fi
 
-	# echo "find '$1' -type f -name $2"
-	# bash -c "find '$1' -type f -name $2"
-	# echo "done!"
-	# exit
-
 	files=$(bash -c "find '$1' -type f -name $2" | wc -l)
 	if [ $files -eq 0 ]; then
 		echo "There are no files."
-		exit
+		exit 1
 	fi
 
 	echo "gitmine will refcount $files files. This may take a while..."
@@ -115,12 +111,40 @@ function commits_per_file {
 		sort | uniq -c | sort -nr | less
 }
 
+# commits since until
+function commits_since_until {
+	if [ "$1" == "" ] || [ "$2" == "" ];
+	then
+		echo ""
+		echo "Command: Show commits since until."
+		echo "ERR: Arguments <since> and <until> are both required."
+		echo "Tip: You can also filter by <author>."
+		echo ""
+		exit 1
+	fi
+
+	# Filter by author?
+	if [ "$3" != "" ]; then
+		git log --since $1 --until $2 \
+			--pretty=format:"%C(yellow)%h %Creset%ad %C(blue)%an %Creset%s" \
+			--date=short --author $3 \
+			--reverse
+	else
+		git log --since $1 --until $2 \
+			--pretty=format:"%C(yellow)%h %Creset%ad %C(blue)%an %Creset%s" \
+			--date=short \
+			--reverse
+		
+	fi
+}
+
 function wbd {
 	if [ "$1" == "" ] || [ "$2" == "" ];
 	then
-		echo "Arguments <since> and <author> are both required for this command."
+		echo "Command: What been doing?"
+		echo "ERR: Arguments <since> and <author> are both required."
 		echo ""
-		exit
+		exit 1
 	fi
 
 	git log --since $1 --pretty=format:"%C(yellow)%h %Creset%an %ad %s" \
@@ -133,12 +157,13 @@ function show_help {
 	echo ""
 	echo "Common commands:"
 	# working
-	echo "   wbd   <date> <author>      What been doing?"
-	echo "   cmpf  [author]             Commits per file."
-	echo "   hi    <filename>           Commits count per file."
-	echo "   score                      Global commit count per author."
+	echo "   cmts  <since> <until> [author]   Show commits since/until."
+	echo "   wbd   <since> <author>           What been doing?"
+	echo "   cmpf  [author]                   Commits per file."
+	echo "   hi    <filename>                 Commits count per file."
+	echo "   score                            Global commit count per author."
 	# FIXME!!!
-	echo "   refc  <filename>           Count class references."
+	echo "   refc  <filename>                 Count class references."
 	echo ""
 }
 
@@ -152,11 +177,14 @@ export -f wbd
 export -f commits_per_file
 export -f hi
 export -f show_help
+export -f commits_since_until
 
 if [[ "$1" == "cmpf" ]]; then
 	commits_per_file "$2"
 elif [[ "$1" == "wbd" ]]; then
 	wbd "$2" "$3"
+elif [[ "$1" == "cmts" ]]; then
+	commits_since_until "$2" "$3" "$4"
 elif [[ "$1" == "score" ]]; then
 	# Global count. 
 	# All authors, all files.
@@ -166,7 +194,7 @@ elif [[ "$1" == "hi" ]]; then
 	# All authors, ONE file.
 	if [ "$2" == "" ]; then
 		echo "The parameter <file> is required for this command.";
-		exit
+		exit 1
 	fi
 	hi "$2"
 elif [[ "$1" == "pwd" ]]; then # <- This one is for debugging purposes.
