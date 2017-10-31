@@ -34,7 +34,7 @@ Just run the instalation script.
 ```
 ./install
 ```
-*\ Note: You may have to add ~/bin to your path (manually).
+\*Note: You may have to add ~/bin to your path (manually).
 
 ## Commands
 ### Commits per file
