@@ -66,6 +66,20 @@ gitmine wbd '2016-05-14' amiralles
 
 ```
 
+### Show Commits Since .. Until
+This command allows you to see a range of commits between two dates.
+(You can also filter by author.)
+
+```
+# arguments:
+# 'yyyy-MM-dd'
+# 'yyyy-MM-dd'
+# author
+
+gitmine cmts '2016-05-14' '2016-08-08' amiralles
+
+```
+
 ### Ref Count
 This command indexes all classes on a given srouce tree and creates a list
 of references to those classes by looking at every file in the codebase.
