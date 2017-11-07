@@ -22,28 +22,41 @@ cp $REMO "$HOME/bin"
 cp $CATF "$HOME/bin"
 cp $VIMF "$HOME/bin"
 
+ERR=0
+
+function inc_err_count {
+	ERR=$((ERR+1));
+}
+
+export inc_err_count
+
 if [ ! -f "$HOME/bin/$GM" ]; then
 	echo "Failed to install *$GM* to $HOME/bin"
+	inc_err_count
 fi
 
 if [ ! -f "$HOME/bin/$REMO" ]; then
 	echo "Failed to install *$REMO* to $HOME/bin"
+	inc_err_count
 fi
 
 if [ ! -f "$HOME/bin/$CATF" ]; then
 	echo "Failed to install *$CATF* to $HOME/bin"
+	inc_err_count
 fi
 
 if [ ! -f "$HOME/bin/$VIMF" ]; then
 	echo "Failed to install *$VIMF* to $HOME/bin"
+	inc_err_count
 fi
 
-# TODO: ERR count > 0 
-#       PRINT ERR => exit.
-#		else => Done!
-echo "Done!"
-echo ""
+if [[ $ERR -gt 0 ]]; then
+	echo "WARN: Some commands will not be available due to installation issues."
+else
+	echo "Done!"
+fi
 
+echo ""
 if [[ :$PATH: != *:"$HOME/bin":* ]] ; then
 	echo "Tip: Add $HOME/bin to your PATH to run scriptishtools straight."
 	echo "If you are using bash, try adding this line to your $HOME/.bashrc file"
