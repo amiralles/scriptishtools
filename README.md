@@ -29,13 +29,6 @@ By using **gitmine** you will be able to tell which files changes
 often, who 've been working on those files, detect potencial refactors, 
 and much more...
 
-## How to install
-Just run the instalation script.
-```
-./install
-```
-\*Note: You may have to add ~/bin to your path (manually).
-
 ## Commands
 ### Commits per file
 This command will show you a list of file names and the commits count for each
@@ -127,3 +120,10 @@ remo
 ```
 
 
+
+# How to install
+Just clone this repo and run the instalation script.
+```
+./install
+```
+\*Note: You may have to add ~/bin to your path (manually).
