@@ -1,4 +1,4 @@
-# Gitmine
+## Gitmine
 Let's suppose you have to start working on a huge project, a really 
 large code base that you never 've seen before. 
 It would be possible for you to be productive from day one?
@@ -29,7 +29,6 @@ By using **gitmine** you will be able to tell which files changes
 often, who 've been working on those files, detect potencial refactors, 
 and much more...
 
-## Commands
 ### Commits per file
 This command will show you a list of file names and the commits count for each
 file. This list is sort in descending order by commits count which means that 
@@ -112,7 +111,7 @@ gitmine hi foo.cs
 gitmine score
 ```
 
-# Remo
+## Remo
 Find and removes \*.orig files from the current working directory and 
 its children.
 ```
@@ -121,7 +120,7 @@ remo
 
 
 
-# How to install
+## How to install
 Just clone this repo and run the instalation script.
 ```
 ./install
