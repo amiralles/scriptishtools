@@ -1,4 +1,4 @@
-## Gitmine
+# Gitmine
 Let's suppose you have to start working on a huge project, a really 
 large code base that you never 've seen before. 
 It would be possible for you to be productive from day one?
@@ -119,7 +119,7 @@ gitmine hi foo.cs
 gitmine score
 ```
 
-## Remo
+# Remo
 Find and removes \*.orig files from the current working directory and 
 its children.
 ```
