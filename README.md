@@ -119,6 +119,11 @@ gitmine hi foo.cs
 gitmine score
 ```
 
-
+## Remo
+Find and removes \*.orig files from the current working directory and 
+its children.
+```
+remo
+```
 
 
