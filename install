@@ -13,22 +13,43 @@ echo "Installing scriptishtools to $HOME/bin ..."
 
 # TODO: Add the rest of the tools.
 GM=gitmine
-cp $GM "$HOME/bin"
+REMO=remo
+CATF=catf
+VIMF=vimf
+
+cp $GM   "$HOME/bin"
+cp $REMO "$HOME/bin"
+cp $CATF "$HOME/bin"
+cp $VIMF "$HOME/bin"
 
 if [ ! -f "$HOME/bin/$GM" ]; then
 	echo "Failed to install *$GM* to $HOME/bin"
-	exit
 fi
 
+if [ ! -f "$HOME/bin/$REMO" ]; then
+	echo "Failed to install *$REMO* to $HOME/bin"
+fi
+
+if [ ! -f "$HOME/bin/$CATF" ]; then
+	echo "Failed to install *$CATF* to $HOME/bin"
+fi
+
+if [ ! -f "$HOME/bin/$VIMF" ]; then
+	echo "Failed to install *$VIMF* to $HOME/bin"
+fi
+
+# TODO: ERR count > 0 
+#       PRINT ERR => exit.
+#		else => Done!
 echo "Done!"
 echo ""
 
-if [[ :$PATH: != *:"~/bin":* ]] ; then
+if [[ :$PATH: != *:"$HOME/bin":* ]] ; then
 	echo "Tip: Add $HOME/bin to your PATH to run scriptishtools straight."
-	echo "If you are using bash, try adding this line to your ~/.bashrc file"
-	echo "(or ~/.bash_profile on the mac.)"
+	echo "If you are using bash, try adding this line to your $HOME/.bashrc file"
+	echo "(or $HOME/.bash_profile on the mac.)"
 	echo ""
-	echo 'export PATH="$PATH:~/bin"'
+	echo 'export PATH="$PATH:$HOME/bin"'
 	echo ""
 fi
 
