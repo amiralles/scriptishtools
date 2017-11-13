@@ -13,12 +13,16 @@ echo "Installing scriptishtools to $HOME/bin ..."
 
 # TODO: Add the rest of the tools.
 GM=gitmine
+GG=gg
 REMO=remo
+REMA=remall
 CATF=catf
 VIMF=vimf
 
 cp $GM   "$HOME/bin"
+cp $GG   "$HOME/bin"
 cp $REMO "$HOME/bin"
+cp $REMA "$HOME/bin"
 cp $CATF "$HOME/bin"
 cp $VIMF "$HOME/bin"
 
@@ -35,8 +39,18 @@ if [ ! -f "$HOME/bin/$GM" ]; then
 	inc_err_count
 fi
 
+if [ ! -f "$HOME/bin/$GG" ]; then
+	echo "Failed to install *$GG* to $HOME/bin"
+	inc_err_count
+fi
+
 if [ ! -f "$HOME/bin/$REMO" ]; then
 	echo "Failed to install *$REMO* to $HOME/bin"
+	inc_err_count
+fi
+
+if [ ! -f "$HOME/bin/$REMA" ]; then
+	echo "Failed to install *$REMA* to $HOME/bin"
 	inc_err_count
 fi
 
