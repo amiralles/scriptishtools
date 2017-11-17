@@ -14,7 +14,7 @@ echo "Installing scriptishtools to $HOME/bin ..."
 GM=gitmine
 DL=diffline
 GG=gg
-GNO=gno
+GITLFC=gitlfc
 REMO=remo
 REMA=remall
 CATF=catf
@@ -22,7 +22,7 @@ VIMF=vimf
 
 cp $GM   "$HOME/bin"
 cp $DL   "$HOME/bin"
-cp $GNO  "$HOME/bin"
+cp $GITLFC  "$HOME/bin"
 cp $GG   "$HOME/bin"
 cp $REMO "$HOME/bin"
 cp $REMA "$HOME/bin"
@@ -47,8 +47,8 @@ if [ ! -f "$HOME/bin/$GG" ]; then
 	inc_err_count
 fi
 
-if [ ! -f "$HOME/bin/$GNO" ]; then
-	echo "Failed to install *$GNO* to $HOME/bin"
+if [ ! -f "$HOME/bin/$GITLFC" ]; then
+	echo "Failed to install *$GITLFC* to $HOME/bin"
 	inc_err_count
 fi
 
