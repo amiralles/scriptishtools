@@ -118,6 +118,35 @@ its children.
 remo
 ```
 
+## DiffLine
+Show differences with previous version for a particular line of code.
+```
+diffline foo.js 14
+
+# Or, if you need more context
+diffline foo.js 14 10
+```
+
+This command is really useful when you run it rigth from your editor. You
+can hook this scrtipt to vi by adding this lines to your .vimrc file.
+
+```viml
+" Show diffs at the current line.
+" (Requires diffline installed)
+function DiffLine()
+	silent !clear
+	let file  = expand("%")
+	let line  = line(".")
+	let diffl = "diffline"
+	execute "!" . l:diffl . " " . l:file . " " . l:line
+endfunction
+
+command Diffline call DiffLine()
+```
+
+Once that you have added that to your .vimrc, you can run :Diffline to 
+see differences from the current line with a previous version of this
+line.
 
 
 ## How to install
