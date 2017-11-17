@@ -150,8 +150,13 @@ endfunction
 command Diffline call DiffLine()
 ```
 
-Once that you have added that to your .vimrc, you can run :Diffline to 
-see differences from the current line with a previous version.
+Once that you have added that to your .vimrc, you can run 
+**:Diffline** to see differences from the current line with a 
+previous version.
+
+
+** TODO: docs for gitlfc, gg, remall, et. al...
+
 
 ## How to install
 Just clone this repo and run the instalation script.
